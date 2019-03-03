@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "ES6",
+    "noImplicitAny": true,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "sourceMap": true
+  },
+  "filesGlob": [
+    "**/src/**/*.ts",
+    "/service/test/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

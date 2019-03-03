@@ -1,0 +1,39 @@
+{
+  "name": "devy-proxy",
+  "version": "0.0.1",
+  "description": "Proxy requests between Amazon Alexa service and Devy clients.",
+  "keywords": [],
+  "homepage": "https://github.com/nickbradley/devy",
+  "bugs": "https://github.com/nickbradley/devy/issues",
+  "author": "Nick Bradley <nbrad11@cs.ubc.ca> (https://nickbradley.github.io)",
+  "repository": "nickbradley/devy",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "lint": "eslint .",
+    "start": "npm run start:prod",
+    "start:dev": "ts-node -r dotenv/config src/app.ts --color",
+    "start:prod": "pm2 start --node-args='-r dotenv/config' src/app.js --name devy-proxy"
+  },
+  "dependencies": {
+    "@types/chai": "^4.1.7",
+    "@types/chai-as-promised": "^7.1.0",
+    "@types/chai-http": "^3.0.5",
+    "@types/mocha": "^5.2.6",
+    "@types/node": "^11.10.4",
+    "@types/restify": "^7.2.8",
+    "@types/ws": "^6.0.1",
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "chai-http": "^4.2.1",
+    "dotenv": "^6.2.0",
+    "mocha": "^6.0.2",
+    "pm2": "^3.3.1",
+    "restify": "^8.0.0",
+    "ws": "6.1.4"
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": "10.15.1"
+  }
+}
