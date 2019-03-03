@@ -30,7 +30,11 @@
     "mocha": "^6.0.2",
     "pm2": "^3.3.1",
     "restify": "^8.0.0",
-    "ws": "6.1.4"
+    "ws": "6.1.4",
+    "eslint": "^5.15.0",
+    "ts-mockito": "2.3.1",
+    "ts-node": "8.0.2",
+    "typescript": "3.3.3333"
   },
   "devDependencies": {},
   "engines": {
