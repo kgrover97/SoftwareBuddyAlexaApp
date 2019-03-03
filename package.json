@@ -11,7 +11,7 @@
   "scripts": {
     "build": "tsc",
     "lint": "eslint .",
-    "start": "npm run start:dev",
+    "start": "npm run start:prod",
     "start:dev": "ts-node -r dotenv/config src/app.ts --color",
     "start:prod": "pm2 start --node-args='-r dotenv/config' src/app.js --name devy-proxy"
   },
