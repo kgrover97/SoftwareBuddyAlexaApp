@@ -42,16 +42,15 @@ export default class WebSocketServer {
                     return reject(err);
                 });
 
-                this.wss.on("connection", (ws: any) => {
-                    // this isn't in the ts type file but see:
-                    // https://github.com/websockets/ws/issues/982
-                    let clientAddr = ws.upgradeReq.headers["x-forwarded-for"] || ws._socket.remoteAddress + ":" + ws._socket.remotePort;
-                    let user = new AlexaUser(ws.upgradeReq.headers['user']);
+                this.wss.on("connection", (ws: any, req: any) => {
+                    // let clientAddr = ws.upgradeReq.headers["x-forwarded-for"] || ws._socket.remoteAddress + ":" + ws._socket.remotePort;
+                    // let user = new AlexaUser(ws.upgradeReq.headers["user"]);
+                    const ip = req.connection.remoteAddress;
 
-                    Log.info(`WebSocketServer::onClientConnect() - New connection from ${clientAddr} by user ${user}.`);
+                    Log.info(`WebSocketServer::onClientConnect() - New connection from ${ip}.`);
                     // when a user closes the connection, remove them from list of users.
                     ws.on("close", () => {
-                        Log.info(`WebSocketServer::onClientClose() - Connection to ${clientAddr} was closed by ${user}.`);
+                        Log.info(`WebSocketServer::onClientClose() - Connection to ${ip} was closed.`);
                     });
                 });
             }

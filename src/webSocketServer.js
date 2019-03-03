@@ -8,7 +8,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const alexaUser_1 = require("./alexaUser");
 const log_1 = require("./log");
 const WebSocket = require("ws");
 class WebSocketServer {
@@ -35,12 +34,11 @@ class WebSocketServer {
                         log_1.default.error(`WebSocketServer::onError() - WebSocket server failed to start. ${err}`);
                         return reject(err);
                     });
-                    this.wss.on("connection", (ws) => {
-                        let clientAddr = ws.upgradeReq.headers["x-forwarded-for"] || ws._socket.remoteAddress + ":" + ws._socket.remotePort;
-                        let user = new alexaUser_1.default(ws.upgradeReq.headers['user']);
-                        log_1.default.info(`WebSocketServer::onClientConnect() - New connection from ${clientAddr} by user ${user}.`);
+                    this.wss.on("connection", (ws, req) => {
+                        const ip = req.connection.remoteAddress;
+                        log_1.default.info(`WebSocketServer::onClientConnect() - New connection from ${ip}.`);
                         ws.on("close", () => {
-                            log_1.default.info(`WebSocketServer::onClientClose() - Connection to ${clientAddr} was closed by ${user}.`);
+                            log_1.default.info(`WebSocketServer::onClientClose() - Connection to ${ip} was closed.`);
                         });
                     });
                 }
