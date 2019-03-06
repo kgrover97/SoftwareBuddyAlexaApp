@@ -28,10 +28,10 @@ export default class RestServer {
     public async start(): Promise<void> {
         return new Promise<void>((fulfill, reject) => {
             try {
-                // certificate: fs.readFileSync(`${__dirname}/../ssl/fullchain.pem`),
-                // key: fs.readFileSync(`${__dirname}/../ssl/privkey.pem`)
                 this.rest = restify.createServer({
                     name: "devy-proxy",
+                    certificate: fs.readFileSync(`${__dirname}/../ssl/certificate.pem`),
+                    key: fs.readFileSync(`${__dirname}/../ssl/private-key.pem`)
                 });
 
                 this.rest.use(restify.plugins.bodyParser());
