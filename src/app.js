@@ -10,7 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const log_1 = require("./log");
 const proxy_1 = require("./proxy");
-let restPort = 443;
+let restPort = 3200;
 let wssPort = 11500;
 (function () {
     return __awaiter(this, void 0, void 0, function* () {
