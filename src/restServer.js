@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const restify = require("restify");
+const fs = require("fs");
 const log_1 = require("./log");
 class RestServer {
     constructor(port) {
@@ -23,6 +24,8 @@ class RestServer {
                 try {
                     this.rest = restify.createServer({
                         name: "devy-proxy",
+                        certificate: fs.readFileSync(`${__dirname}/../ssl/certificate.pem`),
+                        key: fs.readFileSync(`${__dirname}/../ssl/private-key.pem`)
                     });
                     this.rest.use(restify.plugins.bodyParser());
                     this.rest.on("error", (err) => {

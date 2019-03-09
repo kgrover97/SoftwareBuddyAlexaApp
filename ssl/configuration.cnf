@@ -5,9 +5,9 @@ prompt = no
 
 [req_distinguished_name]
 C = US
-ST = WA
-L = SEA
-O = UBC
+ST = VA
+L = Richmond
+O = SFBY
 CN = Software Buddy
 
 [v3_req]
@@ -16,4 +16,4 @@ extendedKeyUsage = serverAuth
 subjectAltName = @subject_alternate_names
 
 [subject_alternate_names]
-DNS.1 = 165.227.45.153
+DNS.1 = ec2-3-88-252-57.compute-1.amazonaws.com

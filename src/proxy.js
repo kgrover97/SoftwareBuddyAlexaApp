@@ -41,7 +41,13 @@ class Proxy {
         });
     }
     forwardAlexaMessages() {
+        this._restServer.registerListener("post", "/", this.hanshakeHandle.bind(this));
         this._restServer.registerListener("post", "/alexa/devy", this.alexaMessageHandler.bind(this));
+    }
+    hanshakeHandle(req, res, next) {
+        return __awaiter(this, void 0, void 0, function* () {
+            log_1.default.info("Recieved a request to /");
+        });
     }
     alexaMessageHandler(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -50,16 +56,6 @@ class Proxy {
                 let user = new alexaUser_1.default(body.session.user.userId);
                 let session = body.session.sessionId;
                 let timedOut = false;
-                let messageHandler = (response) => {
-                    log_1.default.info(`Proxy::alexaMessageHandler(...) - User ${user} responding on session ${session}.` + {
-                        type: "response",
-                        user: user.raw,
-                        session: session,
-                        status: 200,
-                        body: response
-                    });
-                    res.json(200, JSON.parse(response));
-                };
                 log_1.default.info(`Proxy::alexaMessageHandler(...) - Got request for user ${user}.` + {
                     type: "request",
                     user: user.raw,
@@ -69,6 +65,7 @@ class Proxy {
                     body: req.body
                 });
                 if (yield this._wss.isClientReady(user)) {
+                    log_1.default.info("Sending req to client");
                     let response = yield this._wss.send(user, body);
                     log_1.default.info(`Proxy::alexaMessageHandler(...) - User ${user} responding on session ${session}.` + {
                         type: "response",
